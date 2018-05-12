@@ -1,0 +1,12 @@
+.fw-400 {
+  font-weight: 400;
+}
+
+.price__lg {
+  display: block;
+  font-size: 32px;
+}
+
+.divider {
+  margin: 12px 0;
+}
