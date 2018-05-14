@@ -3,10 +3,10 @@ let backendHost;
 
 const hostname = window && window.location && window.location.hostname;
 
-if (hostname === 'homeauction.herokuapp.com' || hostname === 'homeauction-app.herokuapp.com') {
+if (hostname === 'thoughnut.herokuapp.com') {
   backendHost = 'https://homeauction-sails-1.herokuapp.com';
 } else {
-  backendHost = process.env.REACT_APP_BACKEND_HOST || 'http://localhost:1337';
+  backendHost = 'http://localhost:4466/thoughnut/dev';
 }
 
-export const BASE_URL = `${backendHost}/`;
+export default backendHost;

@@ -10,3 +10,15 @@
 .divider {
   margin: 12px 0;
 }
+
+.m-b-16 {
+  margin-bottom: 16px;
+}
+
+.d-block {
+  display: block;
+}
+
+.pull-right {
+  float: right;
+}

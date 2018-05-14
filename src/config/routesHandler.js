@@ -9,7 +9,7 @@ export const AdminLogin = MyLoadable({
 });
 
 export const AdminDashboard = MyLoadable({
-  loader: () => import("../admin/Index")
+  loader: () => import("../admin/containers/Index")
 });
 
 export const FourOhFour = MyLoadable({

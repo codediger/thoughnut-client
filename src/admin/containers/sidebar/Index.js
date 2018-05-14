@@ -2,9 +2,16 @@ import React from "react";
 import { Route, Link } from "react-router-dom";
 import { Layout, Menu, Icon } from "antd";
 
-import Logo from "../../components/logo/Index";
+import Logo from "../../components/Logo";
 
-const Index = ({ collapsed, routes }) => (
+const l = {
+  collapsedWidth: "0",
+  defaultCollapsed: true,
+};
+
+const args = window.outerWidth < 480 ? l : null;
+
+const Sidebar = ({ collapsed, routes }) => (
   <Layout.Sider
     width={256}
     style={{ minHeight: "100vh", background: "#02152a" }}
@@ -12,10 +19,7 @@ const Index = ({ collapsed, routes }) => (
     collapsible
     collapsed={collapsed}
     breakpoint="xs"
-    collapsedWidth="0"
-    onCollapse={(collapsed, type) => {
-      console.log(collapsed, type);
-    }}
+    {...args}
   >
     <Logo />
     <Menu
@@ -38,4 +42,4 @@ const Index = ({ collapsed, routes }) => (
   </Layout.Sider>
 );
 
-export default Index;
+export default Sidebar;

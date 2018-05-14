@@ -1,60 +1,41 @@
-import React, { Component, Fragment } from "react";
-import { Layout, Card, Row, Col, Icon, Divider } from "antd";
+import React, { Component } from "react";
+import { DatePicker, Tabs } from "antd";
+import moment from "moment";
 import "./Home.css";
 
+import ManageAdmin from "../../components/ManageAdmin";
+import ManageCustomer from "../../components/ManageCustomer";
+import RowCard from "../../components/RowCard";
+
+// const dateFormat = "YYYY/MM/DD";
+// const monthFormat = "YYYY/MM";
+
+// const RangeDate = (
+//   <DatePicker.RangePicker
+//     defaultValue={[
+//       moment("2015/01/01", dateFormat),
+//       moment("2015/01/01", dateFormat)
+//     ]}
+//     format={dateFormat}
+//   />
+// );
+
 class User extends Component {
+  callback = key => {
+    console.log(key);
+  };
   render() {
-    return   <Fragment>
-    <Row gutter={8}>
-      <Col xs={24} sm={12} md={12} lg={6} xl={6}>
-        <Card>
-          <span>All users</span>
-          <span className="fw-400 price__lg">$50,008.78</span>
-          <span>Sales up by 11% this week</span>
-          <Divider className="divider" />
-          <span>
-            Average daily sales: <span className="fw-400">$1,000.78</span>
-          </span>
-        </Card>
-      </Col>
-      <Col xs={24} sm={12} md={12} lg={6} xl={6}>
-        <Card>
-          <span>Web views</span>
-          <span className="fw-400 price__lg">400,000</span>
-          <span>4500 visitors this week</span>
-          <Divider className="divider" />
-          <span>
-            Today visitor's count: <span className="fw-400">1000</span>
-          </span>
-        </Card>
-      </Col>
-      <Col xs={24} sm={12} md={12} lg={6} xl={6}>
-        <Card>
-          <span>Orders</span>
-          <span className="fw-400 price__lg">500,003</span>
-          <span>450 orders this week</span>
-          <Divider className="divider" />
-          <span>
-            Average daily sales: <span className="fw-400">$1,000.78</span>
-          </span>
-        </Card>
-      </Col>
-      <Col xs={24} sm={12} md={12} lg={6} xl={6}>
-        <Card>
-          <span>Payments</span>
-          <span className="fw-400 price__lg">$50,008.78</span>
-          <span>Sales up by 11% this week</span>
-          <Divider className="divider" />
-          <span>
-            Conversion Rate: <span className="fw-400">54%</span>
-          </span>
-        </Card>
-      </Col>
-    </Row>
-  </Fragment>
+    return (
+      <Tabs defaultActiveKey="1" onChange={this.callback}>
+        <Tabs.TabPane tab="Manage Customers" key="1">
+          <ManageCustomer />
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="Manage Admins" key="2">
+          <ManageAdmin />
+        </Tabs.TabPane>
+      </Tabs>
+    );
   }
 }
 
-export default User;
-
-
+export default RowCard(User);

@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 
+import RowCard from "../../components/RowCard";
+import EditableTable from "../../components/EditableTable";
+
 class Order extends Component {
   render() {
-    return <div>Order Page</div>;
+    return <EditableTable />;
   }
 }
 
-export default Order;
+export default RowCard(Order);

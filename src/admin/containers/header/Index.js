@@ -2,7 +2,7 @@ import React from "react";
 import { Layout, Icon } from "antd";
 import './index.css'
 
-const Index = ({ collapsed, toggle }) => (
+const Header = ({ collapsed, toggle }) => (
   <Layout.Header style={{ background: "#fff", padding: 0 }}>
     <Icon
       className="trigger"
@@ -12,4 +12,4 @@ const Index = ({ collapsed, toggle }) => (
   </Layout.Header>
 );
 
-export default Index;
+export default Header;

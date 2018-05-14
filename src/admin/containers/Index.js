@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Layout } from "antd";
 
-import Header from "./containers/header/Index";
-import Sidebar from "./containers/sidebar/Index";
-import Body from "./containers/body/Index";
-import Footer from "./containers/footer/Index";
+import Header from "./header/Index";
+import Sidebar from "./sidebar/Index";
+import Body from "./body/Index";
+import Footer from "./footer/Index";
 
-import Home from "./containers/body/Home";
-import User from "./containers/body/User";
-import Product from "./containers/body/Product";
-import Order from "./containers/body/Order";
-import Size from "./containers/body/Size";
-import Setting from "./containers/body/Setting";
+import Home from "./body/Home";
+import User from "./body/User";
+import Product from "./body/Product";
+import Order from "./body/Order";
+import Size from "./body/Size";
+import Setting from "./body/Setting";
 
 const routes = [
   {
@@ -58,9 +58,11 @@ const routes = [
   }
 ];
 
+const collapsed = window.outerWidth < 480 ? true : false;
+
 class Index extends Component {
   state = {
-    collapsed: false
+    collapsed: collapsed
   };
   toggle = () => {
     this.setState({
