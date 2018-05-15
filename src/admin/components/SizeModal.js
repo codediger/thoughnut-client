@@ -5,11 +5,12 @@ import { Modal, Button, Alert } from "antd";
 import { GET_SIZES, CREATE_SIZE, UPDATE_SIZE } from "../../api/size";
 import Loading from "./Loading";
 import SizeModalForm from "./SizeModalForm";
+import Notify from "./Notify";
 
 const SizeModal = props => {
   const {
     visible,
-    loading,
+    handleAfterClose,
     handleModalCancel,
     handleAdd,
     handleUpdate,
@@ -37,14 +38,26 @@ const SizeModal = props => {
 
   const callbackFunction = isCreate ? handleAdd : handleUpdate;
   const mutation = isCreate ? CREATE_SIZE : UPDATE_SIZE;
+  const errorType = isCreate ? "creating" : "updating";
+  const completedType = isCreate ? "created" : "updated";
 
   return (
-    <Mutation mutation={mutation} update={update}>
+    <Mutation
+      mutation={mutation}
+      update={update}
+      onCompleted={() =>
+        Notify("success", "Success", `Size successfully ${completedType}`)
+      }
+      onError={() =>
+        Notify("error", "Error", `An error occured while ${errorType} the size`)
+      }
+    >
       {(mutationFunction, { loading, error }) => (
         <Modal
           title={isCreate ? "Add Size" : `Update Size for ${sizeName}`}
           visible={visible}
           onCancel={handleModalCancel}
+          afterClose={handleAfterClose}
           footer={[
             <Button key="cancel" onClick={handleModalCancel}>
               Cancel
@@ -52,25 +65,14 @@ const SizeModal = props => {
             <Button
               key="submit"
               type="primary"
-              loading={loading}
+              confirmLoading={loading}
               onClick={() => callbackFunction(mutationFunction)}
             >
               Submit
             </Button>
           ]}
         >
-          <Loading loading={loading}>
-            <SizeModalForm {...sizeModalFormProps} required={required} />
-          </Loading>
-          {/* {!error && (
-            <Alert
-              message="Success"
-              description="Size created"
-              type="success"
-              showIcon
-              closable
-            />
-          )} */}
+          <SizeModalForm {...sizeModalFormProps} required={required} />
           {error && (
             <Alert
               message="Error"

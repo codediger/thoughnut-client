@@ -3,6 +3,7 @@ import { Table, Input, Icon, Button, Popconfirm } from "antd";
 import { Mutation } from "react-apollo";
 
 import { DELETE_SIZE, GET_SIZES } from "../../api/size";
+import Notify from './Notify';
 
 class SizeTable extends React.Component {
   constructor(props) {
@@ -38,6 +39,16 @@ class SizeTable extends React.Component {
                     data: { sizes: sizeList }
                   });
                 }}
+                onCompleted={() =>
+                  Notify("success", "Success", "Size successfully deleted")
+                }
+                onError={() =>
+                  Notify(
+                    "error",
+                    "Error",
+                    "An error occured while deleting the size"
+                  )
+                }
               >
                 {(deleteSize, { loading, error }) => (
                   <Popconfirm

@@ -10,7 +10,6 @@ import Loading from "../../components/Loading";
 
 class Size extends Component {
   state = {
-    loading: false,
     visible: false,
     formLayout: "horizontal",
     id: null,
@@ -27,8 +26,7 @@ class Size extends Component {
 
   clearFormAndClose = {
     ...this.clearForm,
-    visible: false,
-    isCreate: true
+    visible: false
   };
 
   showModal = () =>
@@ -48,6 +46,10 @@ class Size extends Component {
 
   handleModalCancel = () => {
     this.setState({ ...this.clearFormAndClose });
+  };
+
+  handleAfterClose = () => {
+    this.setState({ isCreate: true });
   };
 
   handleAdd = mF => {
@@ -71,20 +73,13 @@ class Size extends Component {
   };
 
   render() {
-    const {
-      formLayout,
-      visible,
-      loading,
-      isCreate,
-      name,
-      quantity
-    } = this.state;
+    const { formLayout, visible, isCreate, name, quantity } = this.state;
 
     const sizeModalFormProps = {
       formLayout,
-      handleInputChange: this.handleInputChange,
       name,
-      quantity
+      quantity,
+      handleInputChange: this.handleInputChange
     };
 
     const sizeTableProps = {
@@ -92,13 +87,13 @@ class Size extends Component {
       handleUpdate: this.handleUpdate
     };
 
-    const sideAddModalProps = {
+    const sideModalProps = {
       visible,
-      loading,
       sizeModalFormProps,
       isCreate,
       sizeName: name,
       handleModalCancel: this.handleModalCancel,
+      handleAfterClose: this.handleAfterClose,
       handleAdd: this.handleAdd,
       handleUpdate: this.handleUpdate
     };
@@ -112,7 +107,7 @@ class Size extends Component {
         >
           Add
         </Button>
-        <SizeModal {...sideAddModalProps} />
+        <SizeModal {...sideModalProps} />
         <Query query={GET_SIZES}>
           {({ loading, error, data }) => {
             if (loading)
