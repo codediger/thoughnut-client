@@ -30,6 +30,16 @@ export const CREATE_SIZE = gql`
   }
 `;
 
+export const UPDATE_SIZE = gql`
+  mutation updateSize($id: ID!, $name: String!, $quantity: Int!) {
+    updateSize(data: { name: $name, quantity: $quantity }, where: { id: $id }) {
+      id
+      name
+      quantity
+    }
+  }
+`;
+
 export const DELETE_SIZE = gql`
   mutation deleteSize($id: ID!) {
     deleteSize(where: { id: $id }) {

@@ -22,7 +22,10 @@ class SizeTable extends React.Component {
         render: (text, record) => {
           return props.sizes.length > 1 ? (
             <Button.Group>
-              <Button style={{ color: "green" }} onClick={props.showModal}>
+              <Button
+                style={{ color: "green" }}
+                onClick={() => props.handleUpdateClick(record)}
+              >
                 Update
               </Button>
               <Mutation

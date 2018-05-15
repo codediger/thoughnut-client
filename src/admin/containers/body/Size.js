@@ -5,7 +5,7 @@ import { Query } from "react-apollo";
 import { GET_SIZES } from "../../../api/size";
 import RowCard from "../../components/RowCard";
 import SizeTable from "../../components/SizeTable";
-import SizeAddModal from "../../components/SizeAddModal";
+import SizeModal from "../../components/SizeModal";
 import Loading from "../../components/Loading";
 
 class Size extends Component {
@@ -13,28 +13,53 @@ class Size extends Component {
     loading: false,
     visible: false,
     formLayout: "horizontal",
+    id: null,
+    name: null,
+    quantity: null,
+    isCreate: true
+  };
+
+  clearForm = {
+    id: null,
     name: null,
     quantity: null
   };
-  showModal = () => {
+
+  clearFormAndClose = {
+    ...this.clearForm,
+    visible: false,
+    isCreate: true
+  };
+
+  showModal = () =>
     this.setState({
       visible: true
     });
-  };
 
-  handleModalCancel = () =>
+  handleUpdateClick = ({ id, name, quantity }) => {
     this.setState({
-      visible: false
+      id,
+      name,
+      quantity,
+      visible: true,
+      isCreate: false
     });
-
-  handleUpdate = key => {
-    const dataSource = [...this.state.dataSource];
-    this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
   };
 
-  handleAdd = createSize => {
+  handleModalCancel = () => {
+    this.setState({ ...this.clearFormAndClose });
+  };
+
+  handleAdd = mF => {
     const { name, quantity } = this.state;
-    createSize({ variables: { name, quantity: parseInt(quantity, 10) } });
+    mF({ variables: { name, quantity: parseInt(quantity, 10) } });
+    this.setState({ ...this.clearForm });
+  };
+
+  handleUpdate = mF => {
+    const { id, name, quantity } = this.state;
+    mF({ variables: { id, name, quantity: parseInt(quantity, 10) } });
+    this.setState({ ...this.clearFormAndClose });
   };
 
   handleInputChange = e => {
@@ -46,18 +71,36 @@ class Size extends Component {
   };
 
   render() {
-    const { formLayout, visible, loading } = this.state;
-    const sizeTableProps = {
-      showModal: this.showModal,
-      handleUpdate: this.handleUpdate
-    };
-    const sideAddModalProps = {
+    const {
       formLayout,
       visible,
       loading,
+      isCreate,
+      name,
+      quantity
+    } = this.state;
+
+    const sizeModalFormProps = {
+      formLayout,
+      handleInputChange: this.handleInputChange,
+      name,
+      quantity
+    };
+
+    const sizeTableProps = {
+      handleUpdateClick: this.handleUpdateClick,
+      handleUpdate: this.handleUpdate
+    };
+
+    const sideAddModalProps = {
+      visible,
+      loading,
+      sizeModalFormProps,
+      isCreate,
+      sizeName: name,
       handleModalCancel: this.handleModalCancel,
       handleAdd: this.handleAdd,
-      handleInputChange: this.handleInputChange
+      handleUpdate: this.handleUpdate
     };
     return (
       <Fragment>
@@ -69,7 +112,7 @@ class Size extends Component {
         >
           Add
         </Button>
-        <SizeAddModal {...sideAddModalProps} />
+        <SizeModal {...sideAddModalProps} />
         <Query query={GET_SIZES}>
           {({ loading, error, data }) => {
             if (loading)
