@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Button } from "antd";
+import { Button, Alert } from "antd";
 import { Query } from "react-apollo";
 
 import { GET_SIZES } from "../../../api/size";
@@ -99,12 +99,7 @@ class Size extends Component {
     };
     return (
       <Fragment>
-        <Button
-          className="m-b-16"
-          icon="plus"
-          onClick={this.showModal}
-          style={{ color: "#40a9ff" }}
-        >
+        <Button className="m-b-16" icon="plus" onClick={this.showModal}>
           Add
         </Button>
         <SizeModal {...sideModalProps} />
@@ -116,7 +111,13 @@ class Size extends Component {
                   <Loading loading={loading} />
                 </p>
               );
-            if (error) return <p>Couldn't get the list of sizes :(</p>;
+            if (error)
+              return (
+                <Alert
+                  message="Couldn't get the list of sizes :("
+                  type="error"
+                />
+              );
             const dataSource = data.sizes.map(item => {
               return { ...item, key: item.id };
             });

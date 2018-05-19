@@ -75,8 +75,7 @@ const SizeModal = props => {
           <SizeModalForm {...sizeModalFormProps} required={required} />
           {error && (
             <Alert
-              message="Error"
-              description=" Check your entry, the size or quantity may already exist"
+              message="Check your entry, the size or quantity may already exist"
               type="error"
               showIcon
               closable

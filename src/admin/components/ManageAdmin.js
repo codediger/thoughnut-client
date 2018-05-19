@@ -1,9 +1,22 @@
-import React, { Component } from "react";
-import EditableTable from "./EditableTable";
+import React, { Component, Fragment } from "react";
+import { Button } from "antd";
 
-class ManageAdmin extends React.Component {
+import UserTable from "./UserTable";
+
+class ManageAdmin extends Component {
   render() {
-    return <EditableTable />;
+    return (
+      <Fragment>
+        {/* <Input.Search
+          className="m-b-16"
+          placeholder="Find user by email"
+          onSearch={value => console.log(value)}
+          style={{ width: 200 }}
+          type="email"
+        /> */}
+        <UserTable data={this.props.admin} />
+      </Fragment>
+    );
   }
 }
 

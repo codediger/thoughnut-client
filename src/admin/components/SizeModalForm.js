@@ -7,8 +7,14 @@ const SizeModalForm = props => {
   const formItemLayout =
     formLayout === "horizontal"
       ? {
-          labelCol: { span: 4 },
-          wrapperCol: { span: 14 }
+          labelCol: {
+            xs: { span: 24 },
+            sm: { span: 8 }
+          },
+          wrapperCol: {
+            xs: { span: 24 },
+            sm: { span: 16 }
+          }
         }
       : null;
   return (

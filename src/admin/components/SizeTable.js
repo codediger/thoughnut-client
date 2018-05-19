@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Table, Input, Icon, Button, Popconfirm } from "antd";
+import { Input, Icon, Button, Popconfirm } from "antd";
 import { Mutation } from "react-apollo";
 
 import { DELETE_SIZE, GET_SIZES } from "../../api/size";
-import Notify from './Notify';
+import Notify from "./Notify";
+import Table from "./Table";
 
 class SizeTable extends React.Component {
   constructor(props) {
@@ -71,9 +72,8 @@ class SizeTable extends React.Component {
     const columns = this.columns;
     return (
       <Table
-        bordered
         loading={this.props.loading}
-        dataSource={this.props.sizes}
+        data={this.props.sizes}
         columns={columns}
       />
     );
