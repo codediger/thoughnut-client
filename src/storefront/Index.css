@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,500");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-weight: 300;
+}
+
+.cross-text {
+  position: relative;
+  display: inline-block;
+}
+
+.cross-text::before {
+  content: "";
+  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  border-bottom: 2px solid red;
+  -webkit-transform: skewY(-10deg);
+  transform: skewY(-10deg);
+}
