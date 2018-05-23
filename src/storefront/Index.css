@@ -12,6 +12,10 @@ body {
   font-weight: 300;
 }
 
+::placeholder {
+  color: #c0c0c0;
+}
+
 .cross-text {
   position: relative;
   display: inline-block;

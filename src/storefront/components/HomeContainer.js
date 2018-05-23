@@ -20,7 +20,7 @@ const nav = [
 
 const HomeContainer = props => (
   <Flex>
-    <Item grow wrap width="60%">
+    <Item grow wrap width="60%" alignContent="flex-start">
       <Flex>
         <div style={{ marginBottom: 48 }}>
           <Item>
@@ -35,7 +35,10 @@ const HomeContainer = props => (
           </Item>
         </div>
       </Flex>
-      <ProductList product={props.data} onProductCardClick={props.onProductCardClick}/>
+      <ProductList
+        product={props.data}
+        onProductCardClick={props.onProductCardClick}
+      />
     </Item>
     <Item shrink width="30%">
       <div className="cart">
