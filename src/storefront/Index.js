@@ -16,7 +16,8 @@ import "./Index.css";
 class Index extends Component {
   state = {
     loginDrawer: false,
-    productModal: false
+    productModal: false,
+    loggedIn: false
   };
 
   componentDidMount() {
@@ -32,17 +33,25 @@ class Index extends Component {
     };
   }
 
-  onLoginClick = () =>
-    this.setState(prevState => {
-      return { loginDrawer: !prevState.loginDrawer };
-    });
+  handleLoginClick = () =>
+    this.setState(prevState => ({ loginDrawer: !prevState.loginDrawer }));
 
-  onProductCardClick = (product) => {
-    console.log(product)
-    this.setState(prevState => {
-      return { productModal: !prevState.productModal };
-    })
-  }
+  handleProductCardClick = product => {
+    console.log(product);
+    this.setState(prevState => ({ productModal: !prevState.productModal }));
+  };
+
+  handleToggleModal = () => {
+    this.setState(prevState => ({
+      loginDrawer: !prevState.loginDrawer,
+      loggedIn: true
+    }));
+  };
+
+  handleLogout = () => {
+    localStorage.clear();
+    this.setState({ loggedIn: false });
+  };
 
   render() {
     return (
@@ -54,22 +63,31 @@ class Index extends Component {
                 <Text as="h4" bold>
                   Thoughnut
                 </Text>
-                <Button inverse noBorder onClick={this.onLoginClick}>
-                  Create an account / Login
-                </Button>
+                {this.state.loggedIn ? (
+                  <Button inverse noBorder onClick={this.handleLogout}>
+                    Logout
+                  </Button>
+                ) : (
+                  <Button inverse noBorder onClick={this.handleLoginClick}>
+                    Create an account / Login
+                  </Button>
+                )}
               </Item>
             </Flex>
           </Container>
         </Header>
         <Main>
-          <Home onProductCardClick={this.onProductCardClick} />
+          <Home handleProductCardClick={this.handleProductCardClick} />
         </Main>
         {/* <Footer>
       <Container>
 
       </Container>
     </Footer> */}
-        <Login display={this.state.loginDrawer} />
+        <Login
+          display={this.state.loginDrawer}
+          toggleModal={this.handleToggleModal}
+        />
         <ProductModal display={this.state.productModal} />
       </Fragment>
     );

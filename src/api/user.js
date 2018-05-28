@@ -23,7 +23,7 @@ export const fragments = {
 
 export const GET_CUSTOMERS = gql`
   {
-    users(where: { isAdmin: false }) {
+    customers {
       ...UserDetails
     }
   }
@@ -32,7 +32,7 @@ export const GET_CUSTOMERS = gql`
 
 export const GET_ADMINS = gql`
   {
-    users(where: { isAdmin: true }) {
+    admins {
       ...UserDetails
     }
   }
@@ -41,40 +41,36 @@ export const GET_ADMINS = gql`
 
 export const CHANGE_PASSWORD = gql`
   mutation changePassword($oldPassword: String!, $newPassword: String!) {
-    changePassword(
-      data: { oldPassword: $oldPassword, newPassword: $newPassword }
-    ) {
+    changePassword(oldPassword: $oldPassword, newPassword: $newPassword) {
       id
     }
   }
 `;
 
-// export const CREATE_SIZE = gql`
-//   mutation createSize($name: String!, $quantity: Int!) {
-//     createSize(data: { name: $name, quantity: $quantity }) {
-//       id
-//       name
-//       quantity
-//     }
-//   }
-// `;
+export const LOG_IN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+    }
+  }
+`;
 
-// export const UPDATE_SIZE = gql`
-//   mutation updateSize($id: ID!, $name: String!, $quantity: Int!) {
-//     updateSize(data: { name: $name, quantity: $quantity }, where: { id: $id }) {
-//       id
-//       name
-//       quantity
-//     }
-//   }
-// `;
-
-// export const DELETE_SIZE = gql`
-//   mutation deleteSize($id: ID!) {
-//     deleteSize(where: { id: $id }) {
-//       id
-//       name
-//       quantity
-//     }
-//   }
-// `;
+export const SIGN_UP = gql`
+  mutation signup(
+    $email: String!
+    $password: String!
+    $firstName: String!
+    $lastName: String!
+    $phone: String!
+  ) {
+    signup(
+      email: $email
+      password: $password
+      firstName: $firstName
+      lastName: $lastName
+      phone: $phone
+    ) {
+      token
+    }
+  }
+`;

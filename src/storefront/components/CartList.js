@@ -4,7 +4,7 @@ import CartListItem from "./CartListItem";
 
 const CartList = ({ cart }) => (
   <Fragment>
-    {cart.products.map(item => <CartListItem cartItem={item} key={item.id} />)}
+    {cart.map(item => <CartListItem cartItem={item} key={item.id} />)}
   </Fragment>
 );
 

@@ -6,7 +6,7 @@ const hostname = window && window.location && window.location.hostname;
 if (hostname === 'thoughnut.herokuapp.com') {
   backendHost = 'https://homeauction-sails-1.herokuapp.com';
 } else {
-  backendHost = 'http://localhost:4466/thoughnut/dev';
+  backendHost = 'http://localhost:4000';
 }
 
 export default backendHost;

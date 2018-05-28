@@ -7,14 +7,14 @@ import { ApolloLink, Observable } from "apollo-link";
 
 import host from "./config/host";
 
-const cache = new InMemoryCache({
-  cacheRedirects: {
-    Query: {
-      movie: (_, { id }, { getCacheKey }) =>
-        getCacheKey({ __typename: "Movie", id })
-    }
-  }
-});
+const cache = new InMemoryCache();
+//   cacheRedirects: {
+//     Query: {
+//       movie: (_, { id }, { getCacheKey }) =>
+//         getCacheKey({ __typename: "Movie", id })
+//     }
+//   }
+// });
 
 const request = async operation => {
   const token = await localStorage.getItem("token");
@@ -54,7 +54,7 @@ const client = new ApolloClient({
         //sendToLoggingService(graphQLErrors);
       }
       if (networkError) {
-        console.log("placeholder fro logout User");
+        console.log("placeholder for logout User");
         //logoutUser();
       }
     }),
@@ -75,7 +75,7 @@ const client = new ApolloClient({
     }),
     new HttpLink({
       uri: host,
-      credentials: "include"
+      //credentials: "include"
     })
   ]),
   cache

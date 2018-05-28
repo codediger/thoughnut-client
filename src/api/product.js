@@ -19,14 +19,28 @@ export const fragments = {
       }
     }
     ${userFragment.UserDetails}
+  `,
+
+  MiniProductDetails: gql`
+    fragment MiniProductDetails on Product {
+      id
+      name
+      pricing {
+        discountedPrice
+        basePrice
+      }
+      pictures(first: 1) {
+        url
+      }
+    }
   `
 };
 
 export const GET_PRODUCTS = gql`
   {
-    products(orderBy: createdAt_ASC) {
-      ...ProductDetails
+    products {
+      ...MiniProductDetails
     }
   }
-  ${fragments.ProductDetails}
+  ${fragments.MiniProductDetails}
 `;

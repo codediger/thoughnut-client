@@ -29,7 +29,7 @@ class User extends Component {
                     </p>
                   );
                 if (error) return <p>Couldn't get the list of customers :(</p>;
-                const dataSource = data.users.map(item => {
+                const dataSource = data.customers.map(item => {
                   return { ...item, key: item.id };
                 });
                 return <ManageCustomer customers={dataSource} />;
@@ -48,7 +48,7 @@ class User extends Component {
                     </p>
                   );
                 if (error) return <p>Couldn't get the list of admins :(</p>;
-                const dataSource = data.users.map(item => {
+                const dataSource = data.admins.map(item => {
                   return { ...item, key: item.id };
                 });
                 return <ManageAdmin admin={dataSource} />;
